@@ -62,10 +62,9 @@ public final class ListeChainee
 	
 	public final ListeChainee reverse()
 	{
-		ListeChainee liste_chainee = new ListeChainee();
-		liste_chainee.addDebut(root.getnom());
+		ListeChainee liste_chainee = new ListeChainee(root.getnom());
 		Node node = root.getsuccesseur();
-		while(node.getsuccesseur() != null)
+		while(node != null)
 		{
 			liste_chainee.addDebut(node.getnom());
 			node = node.getsuccesseur();
@@ -75,12 +74,11 @@ public final class ListeChainee
 	
 	public static void main(String [] Args)
 	{
-		ListeChainee liste_chainee = new ListeChainee("azert");
-		liste_chainee.add("Yolo");
-		liste_chainee.add("grg");
-		liste_chainee.add("Azerty");
-		liste_chainee.addDebut("Crayon");
-		liste_chainee.addDebut("LettreALaPoste");
+		ListeChainee liste_chainee = new ListeChainee("A");
+		liste_chainee.add("B");
+		liste_chainee.add("C");
+		liste_chainee.add("D");
+		liste_chainee.addDebut("E");
 		System.out.println(liste_chainee.size());
 		System.out.println(liste_chainee.toString());
 		liste_chainee.reverse();
@@ -127,7 +125,7 @@ public final class ListeChainee
 		public String toString()
 		{
 			if(successeur == null)
-				return "[Nom : " + nom + ']';
+				return "[Nom : " + nom + "] --> //";
 			else
 				return "[Nom : " + nom + "] --> " + successeur.toString();
 		}
