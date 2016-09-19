@@ -1,6 +1,6 @@
 package algo;
 
-public abstract class TP1
+public abstract class TP1Q1
 {
 	public static void f1(long n)
 	{
