@@ -48,9 +48,11 @@ public final class ListeChainee
 	
 	private final void addDebut(String p_nom)
 	{
-		Node t_node 	  = new Node(p_nom, root);
-		if(t_node.size() == root.size() + 1)
-			root 			  = t_node;
+		Node t_node = new Node(p_nom, root);
+		assert(t_node.size() == root.size() + 1);
+		//assert(t_node.size() == root.size() + 0);
+		//assert(t_node.size() == root.size() + 2);
+		root = t_node;
 	}
 	
 	public final String toString()
