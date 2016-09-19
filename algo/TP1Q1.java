@@ -2,14 +2,14 @@ package algo;
 
 public abstract class TP1Q1
 {
-	public static void f1(long n)
+	public final static void f1(long n)
 	{
 		int a = 0;
 		for(long indice =0; indice < n; indice++)
 			a = 1;
 	}
 	
-	public static void f3(long n)
+	public final static void f3(long n)
 	{
 		int a = 0;
 		for(long i = 0; i < n; i++)
@@ -18,7 +18,7 @@ public abstract class TP1Q1
 					a = 1;
 	}
 	
-	public static int g2(long n)
+	public final static int g2(long n)
 	{
 		if(n == 0)
 			return 1;
@@ -26,7 +26,7 @@ public abstract class TP1Q1
 			return g2(n - 1) + g2(n - 1);
 	}
 	
-	public static int g3(long n)
+	public final static int g3(long n)
 	{
 		if(n == 0)
 			return 1;
