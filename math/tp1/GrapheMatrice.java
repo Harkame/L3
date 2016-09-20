@@ -3,7 +3,6 @@ package math.tp1;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 public final class GrapheMatrice
 {
@@ -96,6 +95,9 @@ public final class GrapheMatrice
 		}
 	}
 	
+	/**
+	 * Affiche le nombre de points isoles et la taille de chacune des composantes 
+	 */
 	public final void ecrituretailles()
 	{
 		int [] compteur_composantes = new int [nombre_sommets];
@@ -105,6 +107,10 @@ public final class GrapheMatrice
 		ecrituretailles_aux_composantes_taille(compteur_composantes);
 	}
 	
+	/**
+	 * Affiche le nombre de points isoles, ce qui n'aparaisse qu'une fois
+	 * @param p_compteur_composantes Tableau contenant le nombre de points d'apparition de chaque points
+	 */
 	public final void ecrituretailles_aux_points_isoles(int [] p_compteur_composantes)
 	{
 		int compteur_composantes_isoles = 0;
@@ -114,44 +120,43 @@ public final class GrapheMatrice
 		System.out.println("Il y a " + compteur_composantes_isoles + " points isoles");
 	} 
 	
+	/**
+	 * Affiche le nombre de composantes de meme taille et cette derniere.
+	 * @param p_compteur_composantes Tableau contenant le nombre de points d'apparition de chaque points
+	 */
 	public final void ecrituretailles_aux_composantes_taille(int [] p_compteur_composantes)
 	{
 		int compteur;
 		int taille_courante = 0;
 		List<Integer> l = new ArrayList<Integer>();
-		List<Integer> taille = new ArrayList<Integer>();
 		for(int i = 0; i < p_compteur_composantes.length; i++)
 		{
-			compteur = 0;
-			taille_courante = p_compteur_composantes[i];
-			j : for(int j = 0; j < composantes.length; j++)
-			{
-				if(taille_courante == 0)
-					break j;
-				else if(p_compteur_composantes[j] == taille_courante)
-				{
-					compteur++;
-					p_compteur_composantes[j] = 0;
-				}
-			}
-			if(taille_courante > 1)
-			{
-				l.add(compteur);
-				l.sort(new Comparator<Integer>() {
-			        @Override
-			        public int compare(Integer a, Integer b)
-			        {
-
-			            return  b.compareTo(a);
-			        }
-			    });
-				taille.add(taille_courante);
-			}
+			if(p_compteur_composantes[i] > 0)
+				l.add(p_compteur_composantes[i]);
+			p_compteur_composantes[i] = 0;
 		}
+		l.sort(new Comparator<Integer>()
+		{
+	        @Override
+	        public int compare(Integer a, Integer b)
+	        {
+
+	            return  b.compareTo(a);
+	        }
+	    });
 		for(int index = 0; index < l.size(); index++)
 		{
-			System.out.println("Il y a " + taille.get(index) +  " composantes de taille "+ l.get(index));
+			System.out.println("Il y a " + " composantes de taille "+ l.get(index));
 		}
+	}
+	
+	private final int nombre_occurence(int[] p_tab, int n)
+	{
+		int compteur = 0;
+		for(int i : p_tab)
+			if(i == n)
+				compteur++;
+		return compteur;
 	}
 	
 	private boolean dejaPris(int p_x, int p_y)
@@ -189,7 +194,7 @@ public final class GrapheMatrice
 
 	public static void main(String [] Args) throws Exception
 	{
-		GrapheMatrice graphe_matrice = new GrapheMatrice(5, 3);
+		GrapheMatrice graphe_matrice = new GrapheMatrice(6, 3);
 		
 		graphe_matrice.genererAretesRandom();
 		graphe_matrice.genererComposantes();
