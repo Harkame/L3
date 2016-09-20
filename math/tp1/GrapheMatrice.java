@@ -1,5 +1,8 @@
 package math.tp1;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public final class GrapheMatrice
@@ -75,10 +78,21 @@ public final class GrapheMatrice
 				for(int z = 0; z < nombre_sommets; z++)
 				{
 					if(composantes[z] == aux)
-						composantes[z] = composantes[y];
+						if(composantes[z] < composantes[y])
+							genererComposantesMinimum(composantes[y], composantes[z]);
+						else
+							composantes[z] = composantes[y];
 				}
 			}
-				
+		}
+	}
+	
+	private final void genererComposantesMinimum(int composantes_y, int composantes_z)
+	{
+		for(int i = 0; i < nombre_sommets; i++)
+		{
+			if(composantes[i] == composantes_y)
+				composantes[i] = composantes_z;
 		}
 	}
 	
@@ -104,6 +118,8 @@ public final class GrapheMatrice
 	{
 		int compteur;
 		int taille_courante = 0;
+		List<Integer> l = new ArrayList<Integer>();
+		List<Integer> taille = new ArrayList<Integer>();
 		for(int i = 0; i < p_compteur_composantes.length; i++)
 		{
 			compteur = 0;
@@ -112,15 +128,29 @@ public final class GrapheMatrice
 			{
 				if(taille_courante == 0)
 					break j;
-				else if(p_compteur_composantes[j] == taille_courante) 
+				else if(p_compteur_composantes[j] == taille_courante)
 				{
 					compteur++;
+					p_compteur_composantes[j] = 0;
 				}
 			}
 			if(taille_courante > 1)
-				System.out.println("Il y a " + compteur + " composantes de taille " + taille_courante);
-			else if(taille_courante == 1)
-				System.out.println("Il y a " + compteur + " composante de taille " + taille_courante);
+			{
+				l.add(compteur);
+				l.sort(new Comparator<Integer>() {
+			        @Override
+			        public int compare(Integer a, Integer b)
+			        {
+
+			            return  b.compareTo(a);
+			        }
+			    });
+				taille.add(taille_courante);
+			}
+		}
+		for(int index = 0; index < l.size(); index++)
+		{
+			System.out.println("Il y a " + taille.get(index) +  " composantes de taille "+ l.get(index));
 		}
 	}
 	
@@ -132,13 +162,7 @@ public final class GrapheMatrice
 				return true;
 		return false;
 	}
-	
-	private static int saisireInt(String p_message)
-	{
-		System.out.print(p_message);
-		return new Scanner(System.in).nextInt();
-	}
-	
+		
 	private static int valeurRandom(int p_min, int p_max)
 	{
 		return (int) (Math.random() * (p_max - p_min) + p_min);
@@ -161,12 +185,11 @@ public final class GrapheMatrice
 			System.out.print(composantes[indice] + ", ");
 		System.out.println("");
 	}
+	
 
 	public static void main(String [] Args) throws Exception
 	{
-		GrapheMatrice graphe_matrice = new GrapheMatrice(10,4);
-		
-		/** Debut : Excercice 1 **/
+		GrapheMatrice graphe_matrice = new GrapheMatrice(5, 3);
 		
 		graphe_matrice.genererAretesRandom();
 		graphe_matrice.genererComposantes();
@@ -175,7 +198,6 @@ public final class GrapheMatrice
 		graphe_matrice.print_composantes();
 		System.out.println("");
 		graphe_matrice.ecrituretailles();
-		
-		/** Fin : Excercice 1 **/
+
 	}
 }
