@@ -2,21 +2,18 @@ package math.tp1;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public final class GrapheMatrice
 {
 	private int 	 nombre_sommets;
 	private int [][] aretes;
 	private int []   composantes;
-	
-	public GrapheMatrice()
-	{
-		nombre_sommets  = 0;
-		aretes 			= new int [0][0];
-		composantes 	= new int [0];
-	}
-	
+		
 	public GrapheMatrice(int p_nombre_sommets, int p_nombre_aretes) throws Exception
 	{
 		if((p_nombre_sommets * (p_nombre_sommets - 1) / 2 < p_nombre_aretes))
@@ -36,7 +33,7 @@ public final class GrapheMatrice
 			aretes[ligne][1] = p_aretes[ligne + 1];
 		}
 		composantes = new int [nombre_sommets];	
-	}
+	} 
 	
 	private final void genererAretesRandom()
 	{
@@ -100,54 +97,46 @@ public final class GrapheMatrice
 	 */
 	public final void ecrituretailles()
 	{
-		int [] compteur_composantes = new int [nombre_sommets];
+		HashMap<Integer, Integer> hash_map = new HashMap<Integer, Integer>();
 		for(int index = 0; index < composantes.length; index++)
-			compteur_composantes[composantes[index]]++;
-		ecrituretailles_aux_points_isoles(compteur_composantes);
-		ecrituretailles_aux_composantes_taille(compteur_composantes);
+		{
+			if(hash_map.get(composantes[index]) == null)
+				hash_map.put(composantes[index], 1);
+			else
+				hash_map.put(composantes[index], hash_map.get(composantes[index]) + 1);
+		}
+		ecrituretailles_aux_points_isoles(hash_map);
+		ecrituretailles_aux_composantes_taille(hash_map);
 	}
 	
 	/**
 	 * Affiche le nombre de points isoles, ce qui n'aparaisse qu'une fois
 	 * @param p_compteur_composantes Tableau contenant le nombre de points d'apparition de chaque points
 	 */
-	public final void ecrituretailles_aux_points_isoles(int [] p_compteur_composantes)
+	public final void ecrituretailles_aux_points_isoles(HashMap<Integer, Integer> p_hash_map)
 	{
-		int compteur_composantes_isoles = 0;
-		for(int index = 0; index < p_compteur_composantes.length; index++)
-			if(p_compteur_composantes[index] == 1)
-				compteur_composantes_isoles++;
-		System.out.println("Il y a " + compteur_composantes_isoles + " points isoles");
+		int compteur_points_isoles = 0;
+		for (Map.Entry<Integer,Integer> e : p_hash_map.entrySet())
+			if(e.getValue().equals(1))
+				compteur_points_isoles++;
+		System.out.println("Il y a " + compteur_points_isoles + " points isoles");
 	} 
 	
 	/**
 	 * Affiche le nombre de composantes de meme taille et cette derniere.
 	 * @param p_compteur_composantes Tableau contenant le nombre de points d'apparition de chaque points
 	 */
-	public final void ecrituretailles_aux_composantes_taille(int [] p_compteur_composantes)
+	public final void ecrituretailles_aux_composantes_taille(HashMap<Integer, Integer> p_hash_map)
 	{
-		int compteur;
-		int taille_courante = 0;
-		List<Integer> l = new ArrayList<Integer>();
-		for(int i = 0; i < p_compteur_composantes.length; i++)
-		{
-			if(p_compteur_composantes[i] > 0)
-				l.add(p_compteur_composantes[i]);
-			p_compteur_composantes[i] = 0;
-		}
-		l.sort(new Comparator<Integer>()
-		{
-	        @Override
-	        public int compare(Integer a, Integer b)
-	        {
-
-	            return  b.compareTo(a);
-	        }
-	    });
-		for(int index = 0; index < l.size(); index++)
-		{
-			System.out.println("Il y a " + " composantes de taille "+ l.get(index));
-		}
+		HashMap<Integer, Integer> compteur_composantes = new HashMap<Integer, Integer>();
+		for (Map.Entry<Integer,Integer> e : p_hash_map.entrySet())
+			if(e.getValue() > 1)
+				if(compteur_composantes.get(e.getValue()) == null)
+					compteur_composantes.put(e.getValue(), 1);
+				else
+					compteur_composantes.put(e.getValue(), compteur_composantes.get(e.getValue()) + 1);
+		for (Map.Entry<Integer,Integer> e : compteur_composantes.entrySet())
+			System.out.println("Il y a " + e.getValue() + " composantes de taille " + e.getKey());
 	}
 	
 	private final int nombre_occurence(int[] p_tab, int n)
