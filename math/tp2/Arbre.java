@@ -1,5 +1,7 @@
 package math.tp1;
 
+import java.util.Arrays;
+
 public final class Arbre 
 {
 	private int nombre_points;
@@ -43,9 +45,28 @@ public final class Arbre
 			}			
 	}
 	
+	/**
+	 * Trie edge dans l'ordre croissant
+	 */
 	public final void tri()
 	{
-		
+		int point_a = 0;
+		int point_b = 0;
+		int distance_maximum = 0;
+		for(int i = 0; i < edge.length; i++)
+		{
+			j:for(int j = 0; j < edge.length; j++)
+				if(edge[j][2] > distance_maximum)
+				{
+					point_a = edge[i][0];
+					point_b = edge[i][1];
+					distance_maximum = edge[i][2];
+					break j;
+				}
+			edge[edge.length - 1 - i][0] = point_a;
+			edge[edge.length - 1 - i][1] = point_b;
+			edge[edge.length - 1 - i][2] = distance_maximum;
+		}
 	}
 	
 	public String toString()
@@ -65,6 +86,8 @@ public final class Arbre
 		Arbre arbre = new Arbre(8);
 		arbre.genererPointsRandom();
 		arbre.distances();
+		System.out.println(arbre.toString());
+		arbre.tri();
 		System.out.println(arbre.toString());
 	}
 }
