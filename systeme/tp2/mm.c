@@ -1,83 +1,67 @@
-//#include "mm.h"
+#include "mm.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <unistd.h>
 #include <string.h>
 
-#define TAILLE 4
-
-/** Type pointeur sur une structure de jeu
+/** Fonction principale de la version console du jeu Mastermind
  */
-typedef struct mm* mm;
 
-/** Structure de jeu contenant le mot secret ainsi que le nombre d'essais 
- * effectués
- */
-struct mm
+mm mm_creer()
 {
-  char secret[TAILLE+1];  // mot secret stocké dans une chaine de char
-  int nbessais;		/* nombre d'essai */
-};
-
-/**
- * Crèe un nouveau jeu en générant aléatoirement un nouveau mot secret
- * composé de TAILLE lettres comprises entre 0 et 9.
- * @return un pointeur sur le jeu créé dans le tas (donc à detruire !)
- */
-struct mm mm_creer()
-{
-	struct mm jeu;
-	for(int index = 0; index < 4; index++)
-		jeu.secret[index] = (rand() % (10 - 1) + 1);
-	jeu.nbessais = 0;
-	return jeu;
+  mm* new = (mm*) malloc(sizeof(mm));
+  for(int index = 0; index < TAILLE - 1; index++)
+    ((mm) new)->secret[index] = rand() % (9);
+  //new[0]->nbessais = 0;
+  return (mm) new;
 }
 
-/**
- * Supprime un jeu en désallouant la mémoire
- * @param mm un pointeur sur la structure de jeu
- */
 void mm_detruire(mm jeu)
 {
-	return;
+  free(jeu);
 }
 
-/**
- * teste un mot essai face au mot secret stocké dans le jeu
- * @param jeu un pointeur sur la structure de jeu
- * @param essai la chaîne de caractères proposée par le joueur humain
- * @returns un entier contenant (TAILLE+1)*nb lettres bien placées + nb lettres
- * mal placées; -1 si l'essai est erroné (nb lettres, ...)
- */
-int mm_test(struct mm jeu, char* essai)
+int mm_test(mm jeu, char* essai)
 {
-	printf("essai : %s\n", essai);
-	int compteur_ok = 0;
-	int compteur_mal_place = 0;
-	for(int index = 0; index < sizeof(jeu.secret); index++)
-		if(strcmp(jeu.secret[index], essai) == 0)
-			compteur_ok++;
-	jeu.nbessais++;
-	return 1;
+  if(strlen(essai) != TAILLE)
+    return -1;
+  else
+  {
+    jeu->nbessais++;
+    printf("Pass : %s\n", jeu->secret);
+    printf("COmp : %d", strcmp(jeu->secret, essai));
+    return 1;
+}}
+
+int mm_nbessais(mm jeu)
+{
+ return jeu->nbessais;
 }
 
-/** Retourne le nb d'essais déjà effectués 
- * @param jeu un pointeur sur la structure de jeu
- * @returns le nombre d'essais
- */
-int mm_nbessais(struct mm jeu)
-{
-	return jeu.nbessais;
-}
-
-int main()
-{
-	struct mm jeu = mm_creer();
-	char* test = 0;
-	while(1)
-	{
-		fgets(test, sizeof(jeu.secret), stdin);
-		mm_test(jeu, test);
-	}
+int main(){
+  // printf("taillé"e mm : %d; taille struct mm : %d\n", sizeof(mm), sizeof(struct mm));
+  mm j=mm_creer();		// printf("%s\n",j->secret);
+  char saisie[1024];
+  int res, CONTINUER=1;
+  printf("Jeu a :  %d chiffres [0-9]\r\n", TAILLE);
+  do
+  {
+    printf("?");
+    scanf("%s",saisie);
+    res=mm_test(j,saisie);
+    if (res==-1)
+      printf("Erreur de saisie !\n");
+    else if (res==0)
+      printf("Aucune lettre correcte !\n");
+    else
+    {
+    printf("%d lettres bien placées, %d lettres mal placées !\n", res/(TAILLE+1),res%(TAILLE+1));
+      if(res/(TAILLE+1)==TAILLE)
+      {
+        printf("BRAVO ! Vous avez réussi en %d  essais !\n",mm_nbessais(j));
+        CONTINUER=0;
+      }
+    }
+  } while(CONTINUER);
+  return 0;
 }
