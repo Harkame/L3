@@ -24,7 +24,7 @@ public abstract class Pokemon
 		return "Je suis le Pokemon " + nom + " mon poids est de " + poids + " kg, ma vitesse est de " + vitesse() + " km/h j'ai ";
 	}
 	
-	public float getPoids()
+	public final float getPoids()
 	{
 		return poids;
 	}
