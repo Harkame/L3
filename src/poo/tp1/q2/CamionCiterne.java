@@ -1,4 +1,4 @@
-package poo.tp1.q2.copy;
+package poo.tp1.q2;
 
 public final class CamionCiterne extends Vehicule
 {
