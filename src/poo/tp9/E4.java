@@ -53,9 +53,7 @@ public class E4 extends JFrame implements KeyListener
 					     case KeyEvent.VK_X:
 					     case KeyEvent.VK_COPY:
 					     case KeyEvent.VK_PASTE:
-					    	 StringSelection selection = new StringSelection("");
-					    	 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-					    	 clipboard.setContents(selection, selection);
+					    	 e.consume();
 					    	 System.out.println("Kéblo");
 					    	 break;
 				    	 
@@ -70,9 +68,7 @@ public class E4 extends JFrame implements KeyListener
 							     case KeyEvent.VK_META:
 							     case KeyEvent.VK_COPY:
 							     case KeyEvent.VK_PASTE:
-							    	 StringSelection selection = new StringSelection("");
-							    	 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-							    	 clipboard.setContents(selection, selection);
+							    	 e.consume();
 							    	 System.out.println("Kéblo");
 							    	 break;
 						    	 
