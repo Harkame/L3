@@ -15,7 +15,7 @@ public final class CPile<A> implements IPile<A>
 	@Override
 	public boolean estVide()
 	{
-		return 0 == linked_list.size();
+		return false;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public final class CPile<A> implements IPile<A>
 	@Override
 	public A sommet()
 	{
-		return linked_list.pop();
+		return null;
 	}
 
 	@Override
@@ -51,10 +51,6 @@ public final class CPile<A> implements IPile<A>
 	public static void main(String[] Args)
 	{
 		IPile<Integer> i_pile = new CPile<Integer>();
-		i_pile.empile(42);
-		i_pile.empile(43);
-		System.out.println(i_pile.toString());
-		i_pile.depile();
 		System.out.println(i_pile.toString());
 	}
 }
