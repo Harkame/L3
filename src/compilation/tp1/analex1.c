@@ -6,9 +6,10 @@
 int main()
 {
   int j;			/* jeton retourné par analex() */
-  char* invite = "Saisissez un(des) mot(s) matchant a(b+c)?|bd, (les bd sont considérés comme des commentaires donc sont filtrés) suivi de EOF (CTRL-D) SVP : ";
+  char* invite = "Mots : ";
   creerAfd();
   printf("%s",invite);
+  printf("\n");
 
   while((j = analex()))
   {

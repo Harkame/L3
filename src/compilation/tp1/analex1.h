@@ -1,5 +1,7 @@
 #include <string.h>
 
+void class(int, int, char, char);
+
 char lexeme[1024];		/* lexème courant de taille maxi 1024 */
 int DEBUG = 0;			/* débogage */
 
@@ -17,7 +19,7 @@ int analex()
 	char sc[2];
 	int i;	/* caractère courant */
 
-	lexeme[0]='\0';		/* lexeme en var globale (pour le main)*/
+	lexeme[0] = '\0';		/* lexeme en var globale (pour le main)*/
 
 	while ((c = getchar()) != EOF && TRANS[etat][c] != -1)
 	{
@@ -25,7 +27,7 @@ int analex()
 		strcat(lexeme,sc);		/* concaténation */
 
 		//if(DEBUG)
-			printf("%i -- %c --> %i ;", etat, c, TRANS[etat][c]);
+		printf("%i -- %c --> %i ;", etat, c, TRANS[etat][c]);
 
 		etat = TRANS[etat][c];	/* Avancer */
 
@@ -54,6 +56,7 @@ int analex()
 	}
 	else if(strlen(lexeme) == 0 && c == EOF)
 		return 0;			/* cas particulier */
+
 	else if(strlen(lexeme) == 0)
 	{
 		lexeme[0] = c;
@@ -67,6 +70,21 @@ int analex()
 		for(i=strlen(lexeme) - 1; i >= 1; i--)
 			ungetc(lexeme[i],stdin);	/* rejeter les car en trop */
 
-			return lexeme[0];
+		return lexeme[0];
 	}
+}
+
+void class(int p_etat_depart, int p_etat_fin, char p_char_debut, char p_char_fin)
+{
+	for(int index = p_char_debut; index < p_char_fin; index++)
+		TRANS[p_etat_depart][index] = p_etat_fin;
+}
+
+void class_all(int p_etat_depart, int p_etat_fin)
+{
+	class(p_etat_depart, p_etat_fin, 'A', 'Z');
+	class(p_etat_depart, p_etat_fin, 'a', 'z');
+	class(p_etat_depart, p_etat_fin, '0', '9');
+
+	TRANS[p_etat_depart]['_'] = EID;
 }
