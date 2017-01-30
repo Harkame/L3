@@ -43,19 +43,11 @@ int creerAfd()
     JETON[i] = 0;			/* init tous états non finaux */
   }
 
-  class(EINIT, EID, 'A', 'Z');
-  class(EINIT, EID, 'a', 'z');
-  class(EINIT, EID, '0', '9');
-  TRANS[EINIT]['_'] = EID;
+  class_all(EINIT, EID);
 
   TRANS[EINIT]['i'] = EI;
   TRANS[EINIT]['t'] = ET;
   TRANS[EINIT]['e'] = EE;
-
-  class(EINIT, EID, 'A', 'Z');
-  class(EINIT, EID, 'a', 'z');
-  class(EINIT, EID, '0', '9');
-  TRANS[EINIT]['_'] = EID;
 
   TRANS[EI]['f']    = EIF;
 
