@@ -1,0 +1,15 @@
+1 :
+Debit reel :
+  ascendant  :  61 mb/s
+  descendant :  335mb/s
+
+  ascendant > descendant car la majorité des utilisateurs télécharge plus qu'il n'envoies
+
+  fibre, pas de pertes
+
+  local  : 10.6.16.1
+  public : 132.38.151.21
+
+  3 :
+
+  
