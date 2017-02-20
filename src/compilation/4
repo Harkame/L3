@@ -1,0 +1,103 @@
+%option noyywrap
+
+%{
+  #include "afd.h"
+%}
+
+DIGIT    [0-9]+\.[0-9]*|\.[0-9]+[0-9]+
+ID       [a-z][a-z0-9]*
+
+%%
+
+.|\n  {return yytext[0];}
+
+%%
+
+double F(); /* déclars */
+double R();
+double T();
+double S();
+
+int jeton;                       /* caractère courant du flot d'entrée */
+int numcar = 0;                  /* numero du caractère courant (jeton) */
+
+double E()
+{
+  return R(T()); // E -> TR
+}
+
+double R(int i)
+{
+  if (jeton== '+')
+  {
+    AVANCER
+    return R(i + T()); // R -> +TR
+  }
+  else
+    return i; //R -> epsilon
+}
+
+double T()
+{
+  S(F()); // T -> FS
+}
+
+double S(int i)
+{
+  if (jeton=='*')
+  {             /* regle : S->*FS */
+    AVANCER
+    return S(i * F()); //S -> FS
+  }
+  else
+    return i; //S -> epsilon
+}
+
+/*
+* Parentheses
+*/
+double F()
+{
+  char t_double[255] = {0};
+
+  if(isdigit(jeton))
+  {
+    while(isdigit(jeton))
+    {
+      int res = jeton - '0';
+      char test[255];
+      sprintf(test, "%d", res);
+      strcat(t_double, test);
+      fprintf(stdout, "\nt_double : %s", t_double);
+      AVANCER;
+    }
+
+    double r = jeton - '0';
+
+    AVANCER;
+    return r;
+  }
+  else if(jeton == '(')
+  {
+    AVANCER;
+    int r = E();
+    TEST_AVANCE(')');
+    return r;
+  }
+  else
+    ERREUR_SYNTAXE;
+}
+
+int main(int argc, char** argv)
+{
+  AVANCER			/* initialiser jeton sur le premier car */
+
+  int resultat = E();                          /* axiome */
+  if (jeton == EOF)               /* expression reconnue et rien après */
+    fprintf(stdout, "\nResultat : %d\n", resultat);
+
+  else
+    ERREUR_SYNTAXE           /* expression reconnue mais il reste des car */
+
+  return 0;
+}
