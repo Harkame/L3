@@ -50,7 +50,7 @@ int main()
 	file->remove();
 	file->print();
 	file->remove();
-}
+	}
 	catch(MonException& mon_exception)
 	{
 				cout << mon_exception.message() << endl;
