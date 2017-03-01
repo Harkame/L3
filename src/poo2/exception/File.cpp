@@ -40,16 +40,16 @@ int main()
 	File* file = new File();
 	try
 	{
-	file->print();
-	file->add(14);
-	file->print();
-	file->add(47);
-	file->print();
-	file->remove();
-	file->print();
-	file->remove();
-	file->print();
-	file->remove();
+		file->print();
+		file->add(14);
+		file->print();
+		file->add(47);
+		file->print();
+		file->remove();
+		file->print();
+		file->remove();
+		file->print();
+		file->remove();
 	}
 	catch(MonException& mon_exception)
 	{
