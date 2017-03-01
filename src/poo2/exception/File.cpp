@@ -53,6 +53,6 @@ int main()
 	}
 	catch(MonException& mon_exception)
 	{
-				cout << mon_exception.message() << endl;
+		cout << mon_exception.message() << endl;
 	}
 }
