@@ -1,0 +1,227 @@
+Terminaux inutilisés dans la grammaire
+
+   SYMB
+
+
+État 1 conflits: 2 décalage/réduction, 3 réduction/réduction
+État 3 conflits: 1 décalage/réduction
+État 5 conflits: 3 décalage/réduction
+État 6 conflits: 4 décalage/réduction
+État 9 conflits: 2 décalage/réduction, 5 réduction/réduction
+État 10 conflits: 1 décalage/réduction
+État 12 conflits: 2 décalage/réduction, 4 réduction/réduction
+
+
+Grammaire
+
+    0 $accept: liste $end
+
+    1 liste: liste ligne
+    2      | %empty
+
+    3 ligne: expression '\n'
+    4      | %empty
+
+    5 expression: '(' expression '|' expression
+    6           | expression expression
+    7           | expression '*'
+    8           | '(' expression ')'
+    9           | %empty
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+'\n' (10) 3
+'(' (40) 5 8
+')' (41) 8
+'*' (42) 7
+'|' (124) 5
+error (256)
+SYMB (258)
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (9)
+    à gauche: 0
+liste (10)
+    à gauche: 1 2, à droite: 0 1
+ligne (11)
+    à gauche: 3 4, à droite: 1
+expression (12)
+    à gauche: 5 6 7 8 9, à droite: 3 5 6 7 8
+
+
+État 0
+
+    0 $accept: . liste $end
+
+    $défaut  réduction par utilisation de la règle 2 (liste)
+
+    liste  aller à l'état 1
+
+
+État 1
+
+    0 $accept: liste . $end
+    1 liste: liste . ligne
+
+    $end  décalage et aller à l'état 2
+    '('   décalage et aller à l'état 3
+
+    $end      [réduction par utilisation de la règle 4 (ligne)]
+    '*'       réduction par utilisation de la règle 4 (ligne)
+    '*'       [réduction par utilisation de la règle 9 (expression)]
+    '\n'      réduction par utilisation de la règle 4 (ligne)
+    '\n'      [réduction par utilisation de la règle 9 (expression)]
+    '('       [réduction par utilisation de la règle 4 (ligne)]
+    '('       [réduction par utilisation de la règle 9 (expression)]
+    $défaut  réduction par utilisation de la règle 4 (ligne)
+
+    ligne       aller à l'état 4
+    expression  aller à l'état 5
+
+
+État 2
+
+    0 $accept: liste $end .
+
+    $défaut  accepter
+
+
+État 3
+
+    5 expression: '(' . expression '|' expression
+    8           | '(' . expression ')'
+
+    '('  décalage et aller à l'état 3
+
+    '('       [réduction par utilisation de la règle 9 (expression)]
+    $défaut  réduction par utilisation de la règle 9 (expression)
+
+    expression  aller à l'état 6
+
+
+État 4
+
+    1 liste: liste ligne .
+
+    $défaut  réduction par utilisation de la règle 1 (liste)
+
+
+État 5
+
+    3 ligne: expression . '\n'
+    6 expression: expression . expression
+    7           | expression . '*'
+
+    '*'   décalage et aller à l'état 7
+    '\n'  décalage et aller à l'état 8
+    '('   décalage et aller à l'état 3
+
+    '*'   [réduction par utilisation de la règle 9 (expression)]
+    '\n'  [réduction par utilisation de la règle 9 (expression)]
+    '('   [réduction par utilisation de la règle 9 (expression)]
+
+    expression  aller à l'état 9
+
+
+État 6
+
+    5 expression: '(' expression . '|' expression
+    6           | expression . expression
+    7           | expression . '*'
+    8           | '(' expression . ')'
+
+    '|'  décalage et aller à l'état 10
+    '*'  décalage et aller à l'état 7
+    '('  décalage et aller à l'état 3
+    ')'  décalage et aller à l'état 11
+
+    '|'  [réduction par utilisation de la règle 9 (expression)]
+    '*'  [réduction par utilisation de la règle 9 (expression)]
+    '('  [réduction par utilisation de la règle 9 (expression)]
+    ')'  [réduction par utilisation de la règle 9 (expression)]
+
+    expression  aller à l'état 9
+
+
+État 7
+
+    7 expression: expression '*' .
+
+    $défaut  réduction par utilisation de la règle 7 (expression)
+
+
+État 8
+
+    3 ligne: expression '\n' .
+
+    $défaut  réduction par utilisation de la règle 3 (ligne)
+
+
+État 9
+
+    6 expression: expression . expression
+    6           | expression expression .
+    7           | expression . '*'
+
+    '*'  décalage et aller à l'état 7
+    '('  décalage et aller à l'état 3
+
+    '|'       réduction par utilisation de la règle 6 (expression)
+    '|'       [réduction par utilisation de la règle 9 (expression)]
+    '*'       [réduction par utilisation de la règle 6 (expression)]
+    '*'       [réduction par utilisation de la règle 9 (expression)]
+    '\n'      réduction par utilisation de la règle 6 (expression)
+    '\n'      [réduction par utilisation de la règle 9 (expression)]
+    '('       [réduction par utilisation de la règle 6 (expression)]
+    '('       [réduction par utilisation de la règle 9 (expression)]
+    ')'       réduction par utilisation de la règle 6 (expression)
+    ')'       [réduction par utilisation de la règle 9 (expression)]
+    $défaut  réduction par utilisation de la règle 6 (expression)
+
+    expression  aller à l'état 9
+
+
+État 10
+
+    5 expression: '(' expression '|' . expression
+
+    '('  décalage et aller à l'état 3
+
+    '('       [réduction par utilisation de la règle 9 (expression)]
+    $défaut  réduction par utilisation de la règle 9 (expression)
+
+    expression  aller à l'état 12
+
+
+État 11
+
+    8 expression: '(' expression ')' .
+
+    $défaut  réduction par utilisation de la règle 8 (expression)
+
+
+État 12
+
+    5 expression: '(' expression '|' expression .
+    6           | expression . expression
+    7           | expression . '*'
+
+    '*'  décalage et aller à l'état 7
+    '('  décalage et aller à l'état 3
+
+    '|'       réduction par utilisation de la règle 5 (expression)
+    '|'       [réduction par utilisation de la règle 9 (expression)]
+    '*'       [réduction par utilisation de la règle 9 (expression)]
+    '\n'      réduction par utilisation de la règle 5 (expression)
+    '\n'      [réduction par utilisation de la règle 9 (expression)]
+    '('       [réduction par utilisation de la règle 5 (expression)]
+    '('       [réduction par utilisation de la règle 9 (expression)]
+    ')'       réduction par utilisation de la règle 5 (expression)
+    ')'       [réduction par utilisation de la règle 9 (expression)]
+    $défaut  réduction par utilisation de la règle 5 (expression)
+
+    expression  aller à l'état 9
