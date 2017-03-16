@@ -1,15 +1,15 @@
 CC=gcc
 CFLAGS=-Wall -std=c99
 
-.c:
+.c
 	$(CC) $(CFLAGS) -o $@  $<
-.o:
+.:
 	$(CC) $(CFLAGS) -o $@  $<
 
 .c.o:
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $
 
-mm: mm.o mm.h main.o
+mm: mm.o mm.h main.
 	$(CC) $(CFLAGS) -o mm main.o mm.o
 
 mmgui : mmgui.c mm.o mm.h
