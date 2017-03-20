@@ -1,11 +1,12 @@
 %option noyywrap
 
 %{
-#include "y.tab.h"
+  #include "arbin.h"
+  #include "y.tab.h"
 %}
 
 %%
-[a-z0@] {yylval = yytext[0]; return SYMB;}
+[A-z0@] {yylval.i = yytext[0]; return SYMB;}
 
 [\t]+ {}
 .|\n {return yytext[0];}

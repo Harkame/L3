@@ -400,10 +400,10 @@ static yyconst YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    4,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    4,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    4,    4,    4,    4,
+        1,    1,    1,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
 
         4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
         4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
@@ -467,8 +467,9 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "./analex_flex.l"
 #line 4 "./analex_flex.l"
-#include "y.tab.h"
-#line 472 "lex.yy.c"
+  #include "arbin.h"
+  #include "y.tab.h"
+#line 473 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -686,9 +687,9 @@ YY_DECL
 		}
 
 	{
-#line 7 "./analex_flex.l"
+#line 8 "./analex_flex.l"
 
-#line 692 "lex.yy.c"
+#line 693 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -747,26 +748,26 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "./analex_flex.l"
-{yylval = yytext[0]; return SYMB;}
+#line 9 "./analex_flex.l"
+{yylval.i = yytext[0]; return SYMB;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 10 "./analex_flex.l"
+#line 11 "./analex_flex.l"
 {}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 11 "./analex_flex.l"
+#line 12 "./analex_flex.l"
 {return yytext[0];}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 12 "./analex_flex.l"
+#line 13 "./analex_flex.l"
 ECHO;
 	YY_BREAK
-#line 770 "lex.yy.c"
+#line 771 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1767,7 +1768,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 12 "./analex_flex.l"
+#line 13 "./analex_flex.l"
 
 
 

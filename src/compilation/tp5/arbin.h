@@ -12,13 +12,14 @@
 
 /*----------------------- Types Unions Structures ---------------------------*/
 /** type pointeur sur la racine de l'arbre binaire d'entiers */
-typedef struct Noeudbin * Arbin;
+typedef struct Noeudbin* Arbin;
 
 /** type noeud d'un arbre binaire d'entiers */
-typedef struct Noeudbin {
-    int val ;
-    Arbin fg;
-    Arbin fd ;
+typedef struct Noeudbin
+{
+  int val ;
+  Arbin fg;
+  Arbin fd ;
 } Noeudbin ;
 /*---------------------------FONCTIONS----------------------------------------*/
 
@@ -41,7 +42,7 @@ typedef struct Noeudbin {
  *@param  a un Arbin
  *@return vrai si a est vide, faux sinon
 */
-#define ab_vide(a) (a==NULL)
+#define ab_vide(a) (a == NULL)
 
 /** macro fonction retournant la racine d'un Arbin
  *@param a un Arbin
@@ -86,7 +87,7 @@ Arbin ab_copier(Arbin a);
 /** fonction vidant un Arbin (désallocation). Attention, opération MODIFIANTE !
  *@param pa un pointeur sur Arbin
  */
-void ab_vider(Arbin * pa);
+void ab_vider(Arbin* pa);
 
 /** fonction affichant un Arbin de manière indentée. Attention, racine(a) est
  * affichée comme un char

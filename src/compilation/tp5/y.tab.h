@@ -45,11 +45,15 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    SYMB = 258
+    SYMB = 258,
+    QUIT = 259,
+    CONCAT = 260
   };
 #endif
 /* Tokens.  */
 #define SYMB 258
+#define QUIT 259
+#define CONCAT 260
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -61,7 +65,7 @@ union YYSTYPE
   Arbin a;
   int i;
 
-#line 65 "y.tab.h" /* yacc.c:1909  */
+#line 69 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
