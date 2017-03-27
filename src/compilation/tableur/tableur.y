@@ -11,18 +11,17 @@
   int yyparse();
   int yylex();
   int yyerror(char* s);
-%}
+  using namespace modele;
 
+%}
 %union
 {
   char c;
   int i;
-  modele::Cellule* cel;
-  modele::Binaire* b;
+  Binaire* b;
 }
 
 %type<b> expression;
-%type<cel> cellule
 
 %token<c> LIGNE
 %token<i> COLONNE
@@ -39,7 +38,7 @@ liste : liste ligne {}
 ligne : expression '\n' {cout << $1->toString();}
       ;
 
-expression : expression OPERATEUR expression {$$ = new modele::Binaire($2, $1, $3); cout << $$->toString() << endl;}
+expression : expression '+' expression {$$ = new Binaire('+', $1, $3); cout << "Expr :" << $$->toString() << endl;}
            ;
 %%
 

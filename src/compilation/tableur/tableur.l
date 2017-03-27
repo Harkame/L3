@@ -1,12 +1,14 @@
 %option noyywrap
 
 %{
-  #include "y.tab.h"
-
   #include "Argument.h"
   #include "Expression.h"
   #include "Cellule.h"
   #include "Binaire.h"
+
+  using namespace modele;
+
+  #include "y.tab.h"
 %}
 
 %%

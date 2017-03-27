@@ -7,7 +7,7 @@ m_flex:
 	flex tableur.l;
 
 m_compil:
-	g++ ./lex.yy.c ./y.tab.c -o tableur -L.;
+	g++ ./lex.yy.c ./y.tab.c -o tableur -L. -std=c++11;
 
 m_clear:
 	clear; ls;
