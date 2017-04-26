@@ -52,15 +52,15 @@ class Consommateur
 
       p_mutex_fini.lock();
 
-    }while(!p_fini);
+      }while(!p_fini);
 
-    p_mutex_fini.unlock();
+      p_mutex_fini.unlock();
 
-    while(!p_buffer.empty())
-    {
-      r_sum += p_buffer.front();
-      p_buffer.pop();
-    }
+      while(!p_buffer.empty())
+      {
+        r_sum += p_buffer.front();
+        p_buffer.pop();
+      }
       return r_sum;
     }
   };
