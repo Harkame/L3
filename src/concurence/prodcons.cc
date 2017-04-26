@@ -12,46 +12,76 @@ using namespace std;
 class Producteur
 {
   public:
-    void operator()(queue<int> &buffer, bool &fini) const
+    void operator()(queue<int> &p_buffer, bool& p_fini, mutex& p_mutex_write, condition_variable& p_condition_added, mutex& p_mutex_fini) const
     {
-      for (int i = 1; i <= 30; ++i)
-        buffer.push(i);
+      for (int t_index = 1; t_index <= 5; ++t_index)
+      {
+        p_mutex_write.lock();
+        p_buffer.push(t_index);
+        p_mutex_write.unlock();
+        p_condition_added.notify_all();
+      }
 
-      fini = true;
+      p_mutex_fini.lock();
+      p_fini = true;
+      p_mutex_fini.unlock();
     }
 };
 
 class Consommateur
 {
   public:
-    int operator()(queue<int> &buffer, bool &fini, mutex& verrou condition_variable& cond) const
+    int operator()(queue<int> &p_buffer, bool &p_fini, mutex& p_mutex_read, condition_variable& p_condition_added, mutex& p_mutex_fini) const
     {
-      int summ = 0;
+      int r_sum = 0;
+
+      p_mutex_fini.lock();
+
+      do
       {
-        unique_lock<mutex> ul(verrou);
-        if(!ready)
-          cond.wait();
-      }
+        p_mutex_fini.unlock();
 
-      while (!buffer.empty())
-      {
-        summ+=buffer.front();
-        buffer.pop();
-      }
+        {unique_lock<mutex> t_unique_lock(p_mutex_read);
 
-      return summ;
-};
+          if(p_buffer.empty())
+            p_condition_added.wait(t_unique_lock);
 
-int main()
+          r_sum += p_buffer.front();
+          p_buffer.pop();
+        }
+
+      p_mutex_fini.lock();
+
+    }while(!p_fini);
+
+    p_mutex_fini.unlock();
+
+    while(!p_buffer.empty())
+    {
+      r_sum += p_buffer.front();
+      p_buffer.pop();
+    }
+      return r_sum;
+    }
+  };
+
+void foo()
 {
-  Producteur prod;
-  Consommateur cons;
+  Producteur t_producteur;
+  Consommateur t_consomateur;
 
-  queue<int> buffer;
-  bool fin = false;
+  queue<int> t_buffer;
+  bool t_fin = false;
 
-  thread t1(prod, ref(buffer), ref(fin));
-  future<int> resultat = async(cons, ref(buffer), ref(fin));
+  mutex t_mutex;
+  mutex t_mutex_fini;
+
+  condition_variable t_condition_added;
+
+  thread t1(t_producteur, ref(t_buffer), ref(t_fin), ref(t_mutex), ref(t_condition_added), ref(t_mutex_fini));
+
+  future<int> resultat = async(launch::async, t_consomateur, ref(t_buffer), ref(t_fin), ref(t_mutex), ref(t_condition_added), ref(t_mutex_fini));
+
   resultat.wait();
 
   t1.join();
@@ -59,6 +89,11 @@ int main()
   int res = resultat.get();
 
   cout << "Somme : " << res << endl;
+}
+
+int main()
+{
+  foo();
 
   return 0;
 }
