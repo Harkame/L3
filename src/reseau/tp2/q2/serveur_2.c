@@ -20,7 +20,9 @@
 #define TAILLE_MESSAGE 255
 #define PORT           6666
 
-void foo()
+int g_port = PORT;
+
+void foo(int p_port)
 {
   int sum = 0;
   int d_socket;
@@ -36,7 +38,7 @@ void foo()
 
   sockaddr_in_server.sin_family      = AF_INET;
   sockaddr_in_server.sin_addr.s_addr = INADDR_ANY;
-  sockaddr_in_server.sin_port        = htons(PORT);
+  sockaddr_in_server.sin_port        = htons(p_port);
 
   if(bind(d_socket, (struct sockaddr*) &sockaddr_in_server, sizeof(sockaddr_in_server)) < 0)
   {
@@ -65,7 +67,7 @@ void foo()
 
 int main(int argc , char** argv)
 {
-  foo(argv[1]);
+  foo(atoi(argv[1]));
 
   return 0;
 }

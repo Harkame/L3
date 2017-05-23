@@ -465,8 +465,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "./analex_flex.l"
-#line 4 "./analex_flex.l"
+#line 1 "analex_flex.l"
+#line 4 "analex_flex.l"
   #include "arbin.h"
   #include "y.tab.h"
 #line 473 "lex.yy.c"
@@ -687,7 +687,7 @@ YY_DECL
 		}
 
 	{
-#line 8 "./analex_flex.l"
+#line 8 "analex_flex.l"
 
 #line 693 "lex.yy.c"
 
@@ -748,23 +748,23 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 9 "./analex_flex.l"
+#line 9 "analex_flex.l"
 {yylval.i = yytext[0]; return SYMB;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "./analex_flex.l"
+#line 11 "analex_flex.l"
 {}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 12 "./analex_flex.l"
+#line 12 "analex_flex.l"
 {return yytext[0];}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "./analex_flex.l"
+#line 13 "analex_flex.l"
 ECHO;
 	YY_BREAK
 #line 771 "lex.yy.c"
@@ -1768,7 +1768,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 13 "./analex_flex.l"
+#line 13 "analex_flex.l"
 
 
 
