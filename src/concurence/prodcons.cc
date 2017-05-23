@@ -51,7 +51,7 @@ class Consommateur
           p_queue.pop();
         }
 
-      p_mutex_ended.lock();
+        p_mutex_ended.lock();
 
       }while(!p_ended);
 
