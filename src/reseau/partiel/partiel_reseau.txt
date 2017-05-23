@@ -80,7 +80,8 @@ Exercice 3 :
           Non car Tcp vérifie que tous les paquets on bien été receptionné.
 
      5)
-          C'est pour vérifier que l'entête du paquet n'a pas été alteré entre deux routeurs. ????
+          C'est pour vérifier que l'entête du paquet n'a pas été alteré entre deux routeurs. Vu que le ttl change à chaque saut, 
+          la somme de controle doit prendre la décrémentation effectué à chacun des sauts (donc à chacun des routeurs)
 
 
 
