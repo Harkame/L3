@@ -1,0 +1,91 @@
+Exercice n°1:$
+     1)
+          Classe C :
+               1100 0000.
+               0001 0100.
+               0001 0000.
+               1000 0101
+
+               Reseau : 192.20.16.128
+                    29
+
+               Hôte : 5
+                    3
+     2)
+          a)
+               adresse : 120.162.0.0 (3 bits)
+               masque : 255.255.224.0
+
+          b)
+               a1 : 120.162.0.0
+               a2 : 120.162.32.0
+               a3 : 120.162.64.0
+               a4 : 120.162.96.0
+               a5 : 120.162.128.0
+               a6 : 120.162.160.0
+               a7 : 120.162.192.0
+               a8 : 120.162.224.0
+
+     3)
+          a)
+               5 bits
+
+          b)
+               32 machines (2^5)
+
+          c)
+               3 bits restant soit 2^3 sous réseau possible (soit 8 sous réseaux)
+
+Exercice n°2:
+     1)
+          Application  : Le code
+          Présentation : Syntaxe et Sémantique des données
+          Session      : Synchronisation
+          Transport    : TCP/UDP
+          Reseau       : Transport des paquets (Routeurs)
+          Liaison      : Trames
+          Physique     : Signaux éléctriques
+
+     2)
+          Application : Le fichier
+          ??
+
+     3)
+          H1 -> Routeur -> H2
+
+     4)
+          Si plus d'1 routeur, on passe le paquet au prochain routeur :
+          deux cas :
+                    - il connait un routeur spécifique (spécifiant la route).
+                    - il n'en connait pas (remonte au routeur qui peut connaitre l'adresse).
+
+          jusqu'a arriver a destination.
+
+Exercice 3 :
+     1)
+          Dans la couche transport, on attend tous les paquets, on fait remonter à session.
+
+     2)
+          Utilisation du TTL, on fait remonter à l'expéditeur que le paquet (fragment) est perdu.
+
+          OU
+
+          Accuser de réception dans les paquets dans les entêtes (ACK).
+          si le recepteur (en attente d'un paquet) ne le reçoit pas, il n'enverra pas l'accusé de reception a l'emetteur, celui ci renverra le paquet au bout d'un certain temps (définie en interne).
+
+     3)
+          Oui car udp ne fait aucune verif.
+
+     4)
+          Non car Tcp vérifie que tous les paquets on bien été receptionné.
+
+     5)
+          C'est pour vérifier que l'entête du paquet n'a pas été alteré entre deux routeurs. ????
+
+
+
+
+
+
+
+Exercice n°3:
