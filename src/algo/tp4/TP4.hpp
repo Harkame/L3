@@ -1,5 +1,3 @@
-/* Daviaud Louis, groupe C */
-
 #ifndef TP4_H
 #define TP4_H
 

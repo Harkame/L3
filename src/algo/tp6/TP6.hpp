@@ -1,7 +1,3 @@
-/**
- * Louis Daviaud, L3 Informatique, Groupe C
- */
-
 #ifndef TP6_H
 #define TP6_H
 

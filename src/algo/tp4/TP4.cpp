@@ -1,5 +1,3 @@
-/* Daviaud Louis, groupe C */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "TP4.h"

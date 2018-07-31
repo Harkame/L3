@@ -1,7 +1,3 @@
-/**
- * Louis Daviaud, L3 Informatique, Groupe C
- */
-
 #include "TP6.h"
 
 using namespace std;

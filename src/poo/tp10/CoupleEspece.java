@@ -1,6 +1,6 @@
 package poo.tp10;
 
-public class CoupleEspece <Espece, Espece>
+public class CoupleEspece<Espece, Espece>
 {
-	private 
+	// private
 }

@@ -1,5 +1,3 @@
-//Daviaud Louis, L3 - Informatique, groupe C
-
 #include "fonctionsMysterieuses.h"
 #include <cstdlib>
 #include <iostream>
