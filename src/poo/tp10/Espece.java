@@ -1,6 +1,6 @@
 package poo.tp10;
 
-public class Espece
+public abstract class Espece
 {
 
 }

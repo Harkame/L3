@@ -4,7 +4,7 @@ public final class PetitBus extends Vehicule
 {
 	public PetitBus(String p_immatriculation, int p_chargement_maximum, int p_charge)
 	{
-		super(p_immatriculation, (float)5, p_chargement_maximum, p_charge);
+		super(p_immatriculation, (float) 5, p_chargement_maximum, p_charge);
 	}
 
 	@Override

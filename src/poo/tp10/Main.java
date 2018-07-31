@@ -6,6 +6,6 @@ public class Main
 	{
 		Taureau taureau = new Taureau();
 		Vache vache = new Vache();
-		CoupleEspece(extends Espece & Male) couple;
+		CoupleEspece<Male, Femelle> couple;
 	}
 }

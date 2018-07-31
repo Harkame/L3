@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class Tableau
 {
-	
-	private int [] T;
-	
-	public Tableau(int ... p_T)
+
+	private int[] T;
+
+	public Tableau(int... p_T)
 	{
 		T = p_T;
 	}
-	
+
 	public void triBulles()
 	{
 		int i = T.length - 2;
@@ -30,16 +30,15 @@ public class Tableau
 			i--;
 		}
 	}
-	
+
 	public void affiche()
 	{
 		for(int i = 0; i < T.length; i++)
 			System.out.print(T[i] + " ");
 		System.out.println();
 	}
-	
-	
-	public static void main(String [] Args)
+
+	public static void main(String[] Args)
 	{
 		Tableau obj = new Tableau(42, 75, 36, 9, 12, 13);
 		obj.affiche();

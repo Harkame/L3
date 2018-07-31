@@ -6,7 +6,7 @@ public final class PokemonCroisiere extends PokemonAquatique
 	{
 		super(p_nom, p_poids, p_nombre_nageoires);
 	}
-	
+
 	@Override
 	public float vitesse()
 	{

@@ -5,8 +5,9 @@ import java.util.List;
 
 public class E1
 {
-	
+
 	private static List<String> list;
+
 	private static void getMethods(int i)
 	{
 		Object o = list.get(i);

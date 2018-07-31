@@ -5,17 +5,17 @@ import java.util.ArrayList;
 public class FileAttente
 {
 	protected ArrayList<Personne> contenu;
-	
+
 	public FileAttente()
 	{
 		contenu = new ArrayList<Personne>();
 	}
-	
+
 	public void entre(Personne p)
 	{
 		contenu.add(p);
 	}
-	
+
 	public Personne sort()
 	{
 		Personne p = null;
@@ -26,12 +26,12 @@ public class FileAttente
 		}
 		return p;
 	}
-	
+
 	public boolean estVide()
 	{
 		return contenu.isEmpty();
 	}
-	
+
 	public String toString()
 	{
 		return "" + contenu.toString();
